@@ -9,3 +9,9 @@ node_modules/
 bower_components/
 
 .vscode/
+
+
+
+
+
+geckodriver.log

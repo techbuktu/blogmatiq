@@ -8,4 +8,4 @@ class BaseFunctionalTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    
+
