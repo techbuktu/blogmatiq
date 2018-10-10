@@ -16,7 +16,7 @@ class Blogger(models.Model):
 
 
 	def __str__(self):
-		return "%s: %s" % (self.user.username, self.date_joined)
+		return "%s: %s" % (self.user.username, self.page)
 
 	def save(self, *args, **kwargs):
 		if not self.page:
