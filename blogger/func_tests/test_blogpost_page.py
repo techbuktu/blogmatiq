@@ -8,12 +8,15 @@ class BlogPostTest(BaseFunctionalTest):
     Test that a User's interaction with a BlogPost's detail page
     provides the desired effects.
     """
-
     def get_a_blogpost_page(self):
         """
         A non-test method to retrieve a sample BlogPost detail page.
         """
-        self.fail('Implement me!')
+        pass 
+
+    def post_a_comment(blogpost_page, comment_data, user):
+        pass 
+        
 
     def test_blogpost_has_all_its_attributes(self):
         pass 
