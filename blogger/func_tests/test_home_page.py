@@ -26,5 +26,27 @@ class HomePageTest(BaseFunctionalTest):
         pass 
 
     
+class StaticPagesTest(BaseFunctionalTest):
+    def test_site_has_about_us_link(self):
+        pass 
+
+    def test_site_has_privacy_terms_link(self):
+        pass 
+
+    def test_has_contact_us_link(self):
+        pass 
+
+    def test_site_has_newsletter_page_link(self):
+        pass 
+
+class SiteNavHeaderTest(BaseFunctionalTest):
+    def test_header_nav_has_blogs_link(self):
+        pass
+
+    def test_header_nav_has_registration_link(self):
+        pass 
+
+    def test_site_header_nav_has_login_logout_link(self):
+        pass 
 
 
