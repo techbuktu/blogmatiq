@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from blogger.models import Blog 
 
 # Create your views here.
 PAGE_URL = "page-url-here"
 def home(request):
+    blog_list = Blog.objects.all()
     data = {
+        'blog_list': blog_list,
         "page_url": PAGE_URL
     }
     return render(request, "blogger/index.html", data)
@@ -36,3 +39,10 @@ def legal_terms(request):
          'page_url': PAGE_URL
     }
     return render(request, "blogger/legal.html", data)
+
+def blog_detail(request, blog_page):
+    blog = Blog.objects.get(page=blog_page)
+    context_data = {
+        'blog': blog
+    }
+    return render(request, 'blogger/blog.html', context_data)

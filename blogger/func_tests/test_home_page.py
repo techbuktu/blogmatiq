@@ -14,7 +14,17 @@ class HomePageTest(BaseFunctionalTest):
         self.assertIn('Blogmatiq', self.browser.title)
 
         # She sees that there is a list of the current blogs on the site created by her colleagues
-        blog_list_header = self.browser.find_element_by_id('list_of_blogs')
-        self.assertIn('List of Blogs', blog_list_header.text)
+        blog_list_container = self.browser.find_element_by_id('list_of_blogs')
+        self.assertContains(blog_list_container.text, 'List of Blogs')
 
-        
+        # Maryam notices that there is a list of blogs under this header
+        blog_list = blog_list_container.find_elements_by_class_name('blog_item')
+        #self.assertNotEqual(len(blog_list),0)
+
+
+    def test_home_page_has_list_of_blogs(self):
+        pass 
+
+    
+
+

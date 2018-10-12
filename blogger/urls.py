@@ -3,6 +3,7 @@ from blogger import views
 
 urlpatterns = [
     url(r'^$',views.home, name="home"),
+    url(r'^(?P<blog_page>[-\w]+)/$', views.)
     url(r'^about/$', views.about, name="about"),
     url(r'^contact/$', views.contact, name="contact"),
     url(r'^newsletter/$', views.newsletter, name="newsletter"),

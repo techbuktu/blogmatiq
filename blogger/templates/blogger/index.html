@@ -3,10 +3,16 @@
 
 {% block page_content %}
 
-<div class="mdl-cell mdl-cell--1-col"> 
+<div class="mdl-cell mdl-cell--1-col"  id="list_of_blogs"> 
 
-    <h1 id="list_of_blogs"> List of Blogs</h1>
+    <h1> List of Blogs</h1>
 
+    {% for blog in blog_list %}
+    <div class="blog_item">
+            <a href=""> {{ blog.name }} </a>
+    </div>
+
+    {% endfor %}
 
 </div>
 
