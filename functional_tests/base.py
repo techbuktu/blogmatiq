@@ -8,4 +8,7 @@ class BaseFunctionalTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+    def go_to_page(self, page):
+        return self.browser.get(self.live_server_url + page)
 
+    def 
