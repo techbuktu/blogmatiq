@@ -40,9 +40,19 @@ class BaseFunctionalTest(StaticLiveServerTestCase):
         password_input_box.send_keys(password)
         login_button.click()
 
-    
-    
+    def get_object_owner(self, owner_element_id):
+        return self.browser.find_element_by_id(owner_element_id)
 
-    
+    def get_list_container(self, list_class_name):
+        list_of_elements = self.browser.find_elements_by_class_name(list_class_name)
+        return list_of_elements
 
-    
+    def item_in_list_container(list_class_name, item_position):
+        """
+        Shortcut method for retrieving an item of <item_position>
+        from a list of similar items in the <list_class_name> container.
+        """
+        list_of_elements = self.browser.find_elements_by_class_name(list_class_name)
+        return list_of_elements[item_position]
+
+        
