@@ -10,7 +10,16 @@ from blogger.views import (
     home, about, contact, newsletter, blog_detail, legal_terms, comment_on_post
     )
 
-class HomeViewTest(TestCase):
+class BaseViewTestCase(TestCase):
+    """
+    Base View Unit TestCase for blogger.views and 
+    holds all common methods across all view Unit TestCases
+    """
+
+def post_invalid_data(data, target_url):
+    return 
+
+class HomeViewTest(BaseViewTestCase):
     """
     Tests that all aspects of the blogger.views.home() view are correct, proper and valid.
     """
@@ -23,7 +32,7 @@ class HomeViewTest(TestCase):
     def test_home_view_resolves_to_home_page_url(self):
         pass 
 
-class AboutViewTest(TestCase):
+class AboutViewTest(BaseViewTestCase):
     """
     Tests all aspects of the blogger.views.about() view.
     """
@@ -36,7 +45,7 @@ class AboutViewTest(TestCase):
     def test_view_resolves_to_correct_about_us_url(self):
         pass 
 
-class ContactViewTest(TestCase):
+class ContactViewTest(BaseViewTestCase):
     """
     Tests all aspects of the blogger.views.contact() view.
     """
@@ -60,7 +69,7 @@ class ContactViewTest(TestCase):
         pass 
 
     
-class NewsletterViewTest(TestCase):
+class NewsletterViewTest(BaseViewTestCase):
     """
     Tests all units of the blogger.views.newsletter() view 
     """
@@ -73,7 +82,7 @@ class NewsletterViewTest(TestCase):
     def test_view_renders_correct_html_template(self):
         pass 
 
-class BlogDetailViewTest(TestCase):
+class BlogDetailViewTest(BaseViewTestCase):
     """
     Tests all units of the blogger.views.blog_detail() view.
     """
@@ -90,7 +99,7 @@ class BlogDetailViewTest(TestCase):
     def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
         pass 
 
-class BlogCategoryViewTest(TestCase):
+class BlogCategoryViewTest(BaseViewTestCase):
     """
     Tests all aspects of the blogger.views.blogcategory_detail() view
     """
@@ -109,7 +118,7 @@ class BlogCategoryViewTest(TestCase):
     def test_template_renders_list_of_blog_posts_of_this_category(self):
         pass 
 
-class LegalTermsViewTest(TestCase):
+class LegalTermsViewTest(BaseViewTestCase):
     """
     Tests all granular units of the blogger.views.legal_terms() view.
     """
@@ -122,12 +131,16 @@ class LegalTermsViewTest(TestCase):
     def test_template_renders_legal_terms_context_data(self):
         pass 
 
-class CommentOnPostViewTest(TestCase):
+class CommentOnPostViewTest(BaseViewTestCase):
     """
     Tests all aspects of the blogger.views.comment_on_post() view.
     """
-    def test_commenter_is_authenticated(self):
+    def test_commenter_is_not_an_anonymous_user(self):
         pass 
 
     def test_comment_is_not_a_duplicate(self):
         pass 
+
+    def test_commenter_is_automatically_derived_from_logged_user(self):
+        pass 
+

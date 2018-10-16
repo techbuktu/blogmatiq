@@ -9,7 +9,7 @@ class BlogOwnerTest(BaseFunctionalTest):
     """
 
     def test_blog_has_link_to_owner(self):
-        pass 
+        self.fail("Implement me! ")
 
 class BlogDetailTest(BaseFunctionalTest):
     """
