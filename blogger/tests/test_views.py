@@ -19,6 +19,20 @@ class BaseViewTestCase(TestCase):
 def post_invalid_data(self, data, target_url):
     return self.client.post(target_url, data=data)
 
+def force_login(self, user):
+    """
+    A shortcut method to simulate a user login but the details 
+    of how a user is logged in are not important.
+    """
+    return self.client.force_login(user)
+
+def login(self, auth_credentials):
+    """
+    Logs in a user with the provided username and password credentials.
+    """
+    return self.login(auth_credentials)
+
+
 class HomeViewTest(BaseViewTestCase):
     """
     Tests that all aspects of the blogger.views.home() view are correct, proper and valid.
