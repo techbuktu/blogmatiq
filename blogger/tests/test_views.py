@@ -16,8 +16,8 @@ class BaseViewTestCase(TestCase):
     holds all common methods across all view Unit TestCases
     """
 
-def post_invalid_data(data, target_url):
-    return 
+def post_invalid_data(self, data, target_url):
+    return self.client.post(target_url, data=data)
 
 class HomeViewTest(BaseViewTestCase):
     """
