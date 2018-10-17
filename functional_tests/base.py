@@ -55,4 +55,13 @@ class BaseFunctionalTest(StaticLiveServerTestCase):
         list_of_elements = self.browser.find_elements_by_class_name(list_class_name)
         return list_of_elements[item_position]
 
-        
+    def get_comment_form(self):
+        """
+        A utilty/shortcut method to fetch the #comment_form 
+        container on a page.
+        """
+        comment_form = self.browser.fin_element_by_id('comment_form')
+        return comment_form 
+
+    
+
