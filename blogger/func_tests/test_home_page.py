@@ -3,7 +3,7 @@ from functional_tests.base import BaseFunctionalTest
 from selenium.webdriver.common.keys import Keys 
 
 
-class HomePageTest(BaseFunctionalTest):
+class HomePageVisitorTest(BaseFunctionalTest):
 
     def test_home_page_renders_correclty(self):
         # Maryam found out that her company has set up a mult-user blogging site for the team
@@ -22,10 +22,6 @@ class HomePageTest(BaseFunctionalTest):
         #self.assertNotEqual(len(blog_list),0)
 
 
-    def test_home_page_has_list_of_blogs(self):
-        pass 
-
-    
 class StaticPagesTest(BaseFunctionalTest):
     def test_site_has_about_us_link(self):
         pass 
