@@ -44,7 +44,8 @@ class HomeViewTest(BaseViewTestCase):
         pass 
 
     def test_home_view_resolves_to_home_page_url(self):
-        pass 
+        response = resolve('/')
+        self.assertEqual(response.func, home)
 
 class AboutViewTest(BaseViewTestCase):
     """
