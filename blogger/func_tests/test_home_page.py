@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 class HomePageTest(BaseFunctionalTest):
 
-    def test_home_page_has_site_title(self):
+    def test_home_page_renders_correclty(self):
         # Maryam found out that her company has set up a mult-user blogging site for the team
         # She goes to check it to check out the home page.
         self.browser.get(self.live_server_url)

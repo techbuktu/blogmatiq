@@ -133,6 +133,19 @@ class BlogCategoryViewTest(BaseViewTestCase):
     def test_template_renders_list_of_blog_posts_of_this_category(self):
         pass 
 
+class BlogPostDetailViewTest(BaseViewTestCase):
+    """
+    Tests all aspects of the blogger.views.blogpost_detail() view.
+    """
+    def test_blogpost_detail_url_resolves_to_blogpost_detail_view(self):
+        pass 
+
+    def test_view_renders_correct_template(self):
+        pass 
+
+    def test_blogpost_detail_view_passes_valid_context_data_to_template(self):
+        pass 
+    
 class LegalTermsViewTest(BaseViewTestCase):
     """
     Tests all granular units of the blogger.views.legal_terms() view.
@@ -158,4 +171,3 @@ class CommentOnPostViewTest(BaseViewTestCase):
 
     def test_commenter_is_automatically_derived_from_logged_user(self):
         pass 
-

@@ -3,7 +3,7 @@ from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
 )
 
-class BloggerTestCase(TestCase):
+class BloggerModelTestCase(TestCase):
     """
     Tests the blogger.Blogger model for proper validation, data integrity and state of 
     its fields.
