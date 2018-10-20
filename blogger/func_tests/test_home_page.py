@@ -18,8 +18,10 @@ class HomePageVisitorTest(BaseFunctionalTest):
         self.assertIn('List of Blogs', blog_list_container.text)
 
         # Maryam notices that there is a list of blogs under this header
-        blog_list = blog_list_container.find_elements_by_class_name('blog_item')
-        self.assertEqual(len(blog_list),0)
+        self.wait_for(5)
+        blog_list = self.browser.find_elements_by_class_name('blog_item')
+        print(len(blog_list))
+        self.assertNotEqual(len(blog_list),0)
 
 
 class StaticPagesTest(BaseFunctionalTest):

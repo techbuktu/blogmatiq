@@ -9,9 +9,8 @@
 
     {% for blog in blog_list %}
     <div class="blog_item">
-            <a href=""> {{ blog.name }} </a>
+            <a href="/{{ blog.url}}"> {{ blog.name }} </a>
     </div>
-
     {% endfor %}
 
 </div>
