@@ -1,7 +1,15 @@
 from selenium import webdriver 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase 
+from django.contrib.auth.models import User 
 
 class BaseFunctionalTest(StaticLiveServerTestCase):
+    def create_user(self):
+        user = User.objects.create(username="muhammad", is_staff=True, first_name="Muhammad",
+        last_name="Jalloh")
+        user.set_password("S3CReT123")
+        user.save()
+        return user 
+
     def setUp(self):
         self.browser = webdriver.Firefox()
 

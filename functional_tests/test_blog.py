@@ -1,5 +1,4 @@
 from functional_tests.base import BaseFunctionalTest
-
 from blogger.models import (Blogger, Blog, BlogCategory, BlogPost, Comment)
 
 class BloggerAppFunctionalTest(BaseFunctionalTest):
@@ -7,20 +6,12 @@ class BloggerAppFunctionalTest(BaseFunctionalTest):
     Parent/base Functional Test class to house reusable methods, etc.
     across blogger app's functional tests.
     """
-    def get_blogger(self):
-        """
-        Returns a sample blogger.Blogger model instance for use in tests.
-        """
-        blogger = Blogger.objects.get(user__username="muhammad")
-        return blogger
-    
     def create_a_blog(self, blog_obj):
         """
         utitlity method to generate a blogger.Blog model instance for use in
         testing.
         """
-        blogger = self.get_blogger()
-        blog = Blog.objects.create(blogger=blogger, **blog_obj)
+        blog = Blog.objects.create(owner_id=1, **blog_obj)
         blog.save()
         return blog
 
@@ -47,10 +38,8 @@ class BloggerAppFunctionalTest(BaseFunctionalTest):
         FT utility method to create and return a blogger.Blogger model instance
         for use during testing.
         """
-        from django.contrib.auth.models import User 
-        user = User.objects.get(username="muhammad")
-        blogger = Blogger.objects.create(user=user, **blogger_data)
-        return blogger 
+        user = self.create_user()
+        self.blogger = Blogger.objects.create(user=user, **blogger_data)
 
 
 

@@ -1,10 +1,27 @@
 from selenium import webdriver 
+from selenium import webdriver 
 from functional_tests.base import BaseFunctionalTest
 from functional_tests.test_blog import BloggerAppFunctionalTest
 from selenium.webdriver.common.keys import Keys 
 
 
 class HomePageVisitorTest(BloggerAppFunctionalTest):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+        blog1 = {
+            'name': 'Travelogue', 
+            'desc': 'Wherein I explore global cultures and cuisine.', 
+        }
+        blog2 = {
+            'name': 'Technocrat', 
+            'desc':"Let's talk about code and this code life!"
+        }
+        blogger1 = {
+            "bio": "I am (what you would call) an accomplished 'Bloglite.'"
+        }
+        self.blogger = self.create_blogger(blogger1)
+        self.blog_one = self.create_a_blog(blog1)
+        self.blog_two = self.create_a_blog(blog2)
 
     def test_home_page_renders_correclty(self):
         # Maryam found out that her company has set up a mult-user blogging site for the team

@@ -14,7 +14,6 @@ class Blogger(models.Model):
 	date_joined = models.DateTimeField(auto_now_add=True)
 	last_updated = models.DateTimeField(blank=True, null=True, editable=False)
 
-
 	def __str__(self):
 		return "%s: %s" % (self.user.username, self.page)
 
