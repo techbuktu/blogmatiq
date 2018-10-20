@@ -42,3 +42,15 @@ class BloggerAppFunctionalTest(BaseFunctionalTest):
         blog_post.save()
         return blog_post
 
+    def create_blogger(self, blogger_data):
+        """
+        FT utility method to create and return a blogger.Blogger model instance
+        for use during testing.
+        """
+        from django.contrib.auth.models import User 
+        user = User.objects.get(username="muhammad")
+        blogger = Blogger.objects.create(user=user, **blogger_data)
+        return blogger 
+
+
+
