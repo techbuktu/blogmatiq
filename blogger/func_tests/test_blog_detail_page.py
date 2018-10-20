@@ -1,9 +1,9 @@
 from selenium import webdriver 
-from functional_tests.base import BaseFunctionalTest 
+from functional_tests.test_blog import BloggerAppFunctionalTest
 from selenium.webdriver.common.keys import Keys 
 
 
-class BlogOwnerTest(BaseFunctionalTest):
+class BlogOwnerTest(BloggerAppFunctionalTest):
     """
     Tests a User's interaction with the blog detail page.
     """
@@ -11,7 +11,7 @@ class BlogOwnerTest(BaseFunctionalTest):
     def test_blog_has_link_to_owner(self):
         self.fail("Implement me! ")
 
-class BlogDetailTest(BaseFunctionalTest):
+class BlogDetailTest(BloggerAppFunctionalTest):
     """
     Test that a Blog has all the right attributes/components 
     """
