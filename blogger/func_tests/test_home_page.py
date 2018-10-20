@@ -1,9 +1,10 @@
 from selenium import webdriver 
 from functional_tests.base import BaseFunctionalTest
+from functional_tests.test_blog import BloggerAppFunctionalTest
 from selenium.webdriver.common.keys import Keys 
 
 
-class HomePageVisitorTest(BaseFunctionalTest):
+class HomePageVisitorTest(BloggerAppFunctionalTest):
 
     def test_home_page_renders_correclty(self):
         # Maryam found out that her company has set up a mult-user blogging site for the team
