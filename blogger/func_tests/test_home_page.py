@@ -24,9 +24,15 @@ class HomePageVisitorTest(BaseFunctionalTest):
         self.assertNotEqual(len(blog_list),0)
 
 
-class StaticPagesTest(BaseFunctionalTest):
+class StaticPagesLinksTest(BaseFunctionalTest):
+    def get_footer(self):
+        return self.browser.find_element_by_tag_name('footer')
+    
     def test_site_has_about_us_link(self):
-        pass 
+        self.browser.get(self.live_server_url)
+        footer = self.get_footer()
+        about_us_link = footer.find_element_by_link_text('About Us')
+        self.assertEqual('About Us', about_us_link.text)
 
     def test_site_has_privacy_terms_link(self):
         pass 
