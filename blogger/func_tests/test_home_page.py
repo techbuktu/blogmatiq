@@ -26,22 +26,28 @@ class HomePageVisitorTest(BaseFunctionalTest):
 
 class StaticPagesLinksTest(BaseFunctionalTest):
     def get_footer(self):
+        self.browser.get(self.live_server_url)
         return self.browser.find_element_by_tag_name('footer')
     
     def test_site_has_about_us_link(self):
-        self.browser.get(self.live_server_url)
         footer = self.get_footer()
         about_us_link = footer.find_element_by_link_text('About Us')
         self.assertEqual('About Us', about_us_link.text)
 
     def test_site_has_privacy_terms_link(self):
-        pass 
+        footer = self.get_footer()
+        privacy_link = footer.find_element_by_partial_link_text('Privacy')
+        self.assertIn('Terms', privacy_link.text)
 
     def test_has_contact_us_link(self):
-        pass 
+        footer = self.get_footer()
+        contact_link = footer.find_element_by_partial_link_text('Contact')
+        self.assertEqual('Contact Us', contact_link.text)
 
     def test_site_has_newsletter_page_link(self):
-        pass 
+        footer = self.get_footer()
+        newsletter_link = footer.find_element_by_link_text('Newsletter')
+        self.assertEqual('Newsletter', newsletter_link.text)
 
 class SiteNavHeaderTest(BaseFunctionalTest):
     def test_header_nav_has_blogs_link(self):
