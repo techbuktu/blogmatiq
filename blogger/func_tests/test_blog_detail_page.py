@@ -11,10 +11,23 @@ class BlogOwnerTest(BloggerAppFunctionalTest):
     def test_blog_has_link_to_owner(self):
         self.fail("Implement me! ")
 
-class BlogDetailTest(BloggerAppFunctionalTest):
+class BlogDetailPageTest(BloggerAppFunctionalTest):
     """
-    Test that a Blog has all the right attributes/components 
+    Test that a Blog Page has all the right components 
+    that a site visitor would expect it to have and be
+    able to interact with it.
     """
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+        blogger_dict = {
+            "bio": "I am (what you would call) an accomplished 'Bloglite.'"
+        }
+        self.blogger = self.create_blogger(blogger_dict)
+        blog_dict = {
+            'name': 'Travelogue', 
+            'desc': 'Wherein I explore global cultures and cuisine.', 
+        }
+        self.blog = self.create_a_blog(blog_dict)
     def test_blog_has_all_its_attributes(self):
         pass 
 
