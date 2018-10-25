@@ -9,7 +9,7 @@ class BlogOwnerTest(BloggerAppFunctionalTest):
     """
 
     def test_blog_has_link_to_owner(self):
-        self.fail("Implement me! ")
+        pass 
 
 class BlogDetailPageTest(BloggerAppFunctionalTest):
     """
@@ -19,17 +19,21 @@ class BlogDetailPageTest(BloggerAppFunctionalTest):
     """
     def setUp(self):
         self.browser = webdriver.Firefox()
+        self.create_user()
         blogger_dict = {
             "bio": "I am (what you would call) an accomplished 'Bloglite.'"
         }
+        self.user = self.create_user()
         self.blogger = self.create_blogger(blogger_dict)
         blog_dict = {
             'name': 'Travelogue', 
             'desc': 'Wherein I explore global cultures and cuisine.', 
         }
         self.blog = self.create_a_blog(blog_dict)
+
     def test_blog_has_all_its_attributes(self):
-        pass 
+        self.go_to_page('/travelogue')
+        self.assertIn('travelogue', self.browser.current_url)
 
     def test_blog_detail_page_has_list_of_categories(self):
         pass 

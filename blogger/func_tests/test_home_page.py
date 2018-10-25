@@ -19,9 +19,13 @@ class HomePageVisitorTest(BloggerAppFunctionalTest):
         blogger1 = {
             "bio": "I am (what you would call) an accomplished 'Bloglite.'"
         }
-        self.blogger = self.create_blogger(blogger1)
+        self.create_user()
+        self.create_blogger(blogger1)
         self.blog_one = self.create_a_blog(blog1)
         self.blog_two = self.create_a_blog(blog2)
+
+    def tearDown(self):
+        self.browser.quit()
 
     def test_home_page_renders_correclty(self):
         # Maryam found out that her company has set up a mult-user blogging site for the team

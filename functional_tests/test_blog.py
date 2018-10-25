@@ -11,7 +11,11 @@ class BloggerAppFunctionalTest(BaseFunctionalTest):
         utitlity method to generate a blogger.Blog model instance for use in
         testing.
         """
-        blog = Blog.objects.create(owner_id=1, **blog_obj)
+        blogger_dict = {
+            "bio": "I am (what you would call) an accomplished 'Bloglite.'"
+        }
+        blog_owner = self.create_blogger(blogger_dict)
+        blog = Blog.objects.create(owner=blog_owner, **blog_obj)
         blog.save()
         return blog
 
@@ -38,8 +42,10 @@ class BloggerAppFunctionalTest(BaseFunctionalTest):
         FT utility method to create and return a blogger.Blogger model instance
         for use during testing.
         """
-        user = self.create_user()
-        self.blogger = Blogger.objects.create(user=user, **blogger_data)
-
-
-
+        if self.user:
+            blogger = Blogger.objects.create(user=self.user, **blogger_data)
+        else:
+            self.create_user()
+            blogger = Blogger.objects.create(user=self.user, **blogger_data)
+        blogger.save()
+        return blogger 

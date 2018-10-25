@@ -4,11 +4,15 @@ from django.contrib.auth.models import User
 
 class BaseFunctionalTest(StaticLiveServerTestCase):
     def create_user(self):
-        user = User.objects.create(username="muhammad", is_staff=True, first_name="Muhammad",
-        last_name="Jalloh")
+        if self.user:
+            self.user.delete()
+        user = User.objects.create(
+            username="muhammad", is_staff=True, 
+            first_name="Muhammad",last_name="Jalloh"
+            )
         user.set_password("S3CReT123")
         user.save()
-        return user 
+        self.user = user
 
     def setUp(self):
         self.browser = webdriver.Firefox()
