@@ -45,4 +45,4 @@ def blog_detail(request, blog_page):
     context_data = {
         'blog': blog
     }
-    return render(request, 'blogger/blog.html', context_data)
+    return render(request, 'blogger/blog_detail.html', context_data)
