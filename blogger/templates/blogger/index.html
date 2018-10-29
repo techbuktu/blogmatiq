@@ -9,7 +9,7 @@
 
     {% for blog in blog_list %}
     <div class="blog_item">
-            <a href="/{{ blog.url}}"> {{ blog.name }} </a>
+            <a href="{% url 'blogger:blog_detail' blog.page %}"> {{ blog.name }} </a>
     </div>
     {% endfor %}
 

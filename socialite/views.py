@@ -7,7 +7,10 @@ def home(request):
 
 
 def facebook_share(request, page_url):
-    data = {}
+    page_url = page_url
+    data = {
+        'page_url': page_url
+    }
     return render(request, "socialite/facebook_share.html", data)
 
 def twitter_share(request, page_url):

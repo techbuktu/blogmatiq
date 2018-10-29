@@ -42,7 +42,9 @@ def legal_terms(request):
 
 def blog_detail(request, blog_page):
     blog = Blog.objects.get(page=blog_page)
+    page_url = request.path 
     context_data = {
-        'blog': blog
+        'blog': blog,
+        'page_url': page_url
     }
     return render(request, 'blogger/blog_detail.html', context_data)
