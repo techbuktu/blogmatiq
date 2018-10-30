@@ -12,7 +12,7 @@
 
     <h1> Blog Categories </h1>
 
-    {% for blog in blog_list %}
+    {% for category in blog_categories %}
     <div class="blog_item">
             <a href="{% url 'blogger:blog_detail' blog.page %}"> {{ blog.name }} </a>
     </div>
@@ -21,7 +21,7 @@
 
     <h1> Recent Blog Posts </h1>
 
-    {% for blog in blog_list %}
+    {% for post in blogposts_list %}
     <div class="blog_item">
             <a href="{% url 'blogger:blog_detail' blog.page %}"> {{ blog.name }} </a>
     </div>

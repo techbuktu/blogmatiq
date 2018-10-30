@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from blogger.models import Blog 
+from blogger.models import (Blogger, Blog, BlogCategory, BlogPost, Comment)
 
 # Create your views here.
 PAGE_URL = "page-url-here"
@@ -42,9 +42,13 @@ def legal_terms(request):
 
 def blog_detail(request, blog_page):
     blog = Blog.objects.get(page=blog_page)
-    page_url = request.path.strip('')
+    blog_categories = BlogCategory.objects.filter(blog=blog)
+    blogposts_list = BlogPost.objects.filter(category__blog__page=blog_page)
+    page_url = request.path
     context_data = {
         'blog': blog,
-        'page_url': page_url
+        'page_url': page_url,
+        'blog_categories': blog_categories,
+        'blogposts_list': blogposts_list
     }
     return render(request, 'blogger/blog_detail.html', context_data)
