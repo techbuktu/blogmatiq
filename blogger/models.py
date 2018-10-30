@@ -114,6 +114,11 @@ class BlogPost(models.Model):
 	def __str__(self):
 		return "%s => %s" % (self.title, self.category.name)
 
+	def save(self, *args, **kwargs):
+		if not self.page:
+			self.page = slugify(self.title)
+		super(BlogPost, save).save(*args, **kwargs)
+
 	@property
 	def filterable_fields(self):
 		'''
