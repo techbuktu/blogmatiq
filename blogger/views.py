@@ -49,7 +49,7 @@ def blog_detail(request, blog_page):
         'blog': blog,
         'page_url': page_url,
         'blog_categories': blog_categories,
-        'blogposts_list': blogposts_list
+        'blog_posts': blogposts_list
     }
     return render(request, 'blogger/blog_detail.html', context_data)
 

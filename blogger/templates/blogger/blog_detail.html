@@ -13,8 +13,8 @@
     <h1> Blog Categories </h1>
 
     {% for category in blog_categories %}
-    <div class="blog_item">
-            <a href="{% url 'blogger:blog_detail' blog.page %}"> {{ blog.name }} </a>
+    <div class="blog_category">
+            <a href="{% url 'blogger:blog_category' category.blog.page category.page %}"> {{ category.name }} </a>
     </div>
     {% endfor %}
 
