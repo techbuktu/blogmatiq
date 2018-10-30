@@ -117,7 +117,7 @@ class BlogPost(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.page:
 			self.page = slugify(self.title)
-		super(BlogPost, save).save(*args, **kwargs)
+		super(BlogPost, self).save(*args, **kwargs)
 
 	@property
 	def filterable_fields(self):
