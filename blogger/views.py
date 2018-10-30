@@ -52,3 +52,22 @@ def blog_detail(request, blog_page):
         'blogposts_list': blogposts_list
     }
     return render(request, 'blogger/blog_detail.html', context_data)
+
+def blog_category_detail(request, blog_page, category_page):
+    category = BlogCategory.objects.get(blog__page=blog_page, page=category_page)
+    category_posts = BlogPost.objects.filter(category=category)
+    data = {
+        'category': category,
+        'category_posts': category_posts
+    }
+    return render(request, 'blogger/blog_category_detail.html', data)
+
+def blog_post_detail(request, blog_page, category_page, post_page):
+    blog_post = BlogPost.objects.get(page=post_page)
+    comments = blog_post.comments.al()
+    data = {
+        'blog_post': blog_post,
+        'comments_on_post': comments
+    }
+    return render(request, 'blogger/blog_post.html', data)
+

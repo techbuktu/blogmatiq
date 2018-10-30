@@ -7,7 +7,8 @@ from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
 )
 from blogger.views import (
-    home, about, contact, newsletter, blog_detail, legal_terms, comment_on_post
+    home, about, contact, newsletter, blog_detail, legal_terms, comment_on_post,
+    blog_category_detail, blog_post_detail
     )
 
 class BaseViewTestCase(TestCase):
