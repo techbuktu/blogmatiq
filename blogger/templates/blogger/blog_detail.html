@@ -21,12 +21,11 @@
 
     <h1> Recent Blog Posts </h1>
 
-    {% for post in blogposts_list %}
-    <div class="blog_item">
-            <a href="{% url 'blogger:blog_detail' blog.page %}"> {{ blog.name }} </a>
+    {% for post in blog_posts %}
+    <div class="blog_post_item">
+            <a href="{% url 'blogger:blog_post' blog.page post.category.page post.page %}"> {{ post.title }} </a>
     </div>
     {% endfor %}
-
 
 </div>
 
