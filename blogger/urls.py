@@ -12,5 +12,4 @@ urlpatterns = [
     url(r'^(?P<blog_page>[-\w]+)/(?P<category_page>[-\w]+)/$', views.blog_category_detail, name="blog_category"),
     url(r'^(?P<blog_page>[-\w]+)/(?P<category_page>[-\w]+)/(?P<post_page>[-\w]+)/$', views.blog_post_detail, name="blog_post"),
     
-
 ]

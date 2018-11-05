@@ -16,7 +16,7 @@
     <h1> Recent Blog Posts </h1>
 
     {% for post in category_posts %}
-    <div class="blog_post_item">
+    <div class="category_post_item">
             <a href="{% url 'blogger:blog_post' category.blog.page post.category.page post.page %}"> {{ post.title }} </a>
     </div>
     {% endfor %}
