@@ -21,14 +21,11 @@ class BaseModelTestCase(TestCase):
         user.save()
         self.user = user 
 
-    def create_mock_blogger(self):
+    def create_mock_blogger(self, blogger_info):
         """
         Create a mock blogger.Blogger() instance
         """
         self.create_mock_user()
-        blogger_info = {
-            'bio': 'I am a Software Blogger.'
-        }
         if self.user:
             blogger = Blogger.objects.create(user=self.user, **blogger_info)
         else:
@@ -74,8 +71,7 @@ class BaseModelTestCase(TestCase):
             self.create_mock_user()
             comment = Comment.objects.create(comment=self.user, **comment_data)
         comment.save()
-        return comment 
-
+        return comment
 
 class BloggerModelTestCase(BaseModelTestCase):
     """
@@ -91,7 +87,11 @@ class BloggerModelTestCase(BaseModelTestCase):
         self.assertEqual('muhammad', self.user.username)
 
     def test_blogger_is_related_onetoone_to_a_user(self):
-        pass 
+        blogger_info = {
+            'bio': 'I am a Software Blogger'
+        }
+        self.create_mock_blogger(blogger_info)
+        self.assertEqual(self.blogger, self.user.blogger)        
 
     def test_blogger_has_a_valid_page_field_value(self):
         pass 
