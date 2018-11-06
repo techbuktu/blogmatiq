@@ -64,10 +64,17 @@ class BaseModelTestCase(TestCase):
         blog_post.save()
         return blog_post
     
-    def create_mock_comment(self):
+    def create_mock_comment(self, comment_data):
         """
+        Utility method to create a blogger.Comment instance
         """
-        pass 
+        if self.user:
+            comment = Comment.objects.create(commenter=self.user, **comment_data)
+        else:
+            self.create_mock_user()
+            comment = Comment.objects.create(comment=self.user, **comment_data)
+        comment.save()
+        return comment 
 
 
 class BloggerModelTestCase(BaseModelTestCase):
