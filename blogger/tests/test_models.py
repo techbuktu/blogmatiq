@@ -1,4 +1,5 @@
 from django.test import TestCase 
+from django.contrib.auth.models import User 
 from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
 )
@@ -12,7 +13,13 @@ class BaseModelTestCase(TestCase):
         """
         Create a mock django.contrib.auth.models.User() object.
         """
-        pass 
+        user = User.objects.create(
+            username="muhammad", is_staff=True, 
+            first_name="Muhammad",last_name="Jalloh"
+            )
+        user.set_password("S3CReT123")
+        user.save()
+        self.user = user 
 
     def create_mock_blogger(self):
         """
@@ -46,11 +53,18 @@ class BaseModelTestCase(TestCase):
         pass 
 
 
-class BloggerModelTestCase(TestCase):
+class BloggerModelTestCase(BaseModelTestCase):
     """
     Tests the blogger.Blogger model for proper validation, data integrity and state of 
     its fields.
     """
+    def test_user_exists(self):
+        """
+        Check that a User() can be automatically-created using the base 
+        self.create_mock_user() method.
+        """
+        self.create_mock_user()
+        self.assertEqual('muhammad', self.user.username)
 
     def test_blogger_is_related_onetoone_to_a_user(self):
         pass 
