@@ -15,6 +15,7 @@
     <h5> Comments on this Blog Post </h5>
 {% if comments %}
 
+<div class="mdl-cell mdl-cell--9-col"  id="blog_post_comments"> 
 {% for comment in comments %}
 <div class="post_comment_item">
         <h6>
@@ -27,6 +28,7 @@
         <a href="{% url 'blogger:blog_post' blog.page post.category.page post.page %}"> {{ post.title }} </a>
 </div>
 {% endfor %}
+</div>
 
 {% else %}
 
