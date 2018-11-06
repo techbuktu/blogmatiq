@@ -72,7 +72,7 @@ class BaseFunctionalTest(StaticLiveServerTestCase):
         A utilty/shortcut method to fetch the #comment_form 
         container on a page.
         """
-        comment_form = self.browser.fin_element_by_id('comment_form')
+        comment_form = self.browser.find_element_by_id('comment_form')
         return comment_form 
 
     

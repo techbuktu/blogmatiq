@@ -3,6 +3,49 @@ from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
 )
 
+class BaseModelTestCase(TestCase):
+    """
+    The Base TestCase class for all model tests to house app-wide utility methods,
+    etc.
+    """
+    def create_mock_user(self):
+        """
+        Create a mock django.contrib.auth.models.User() object.
+        """
+        pass 
+
+    def create_mock_blogger(self):
+        """
+        Create a mock blogger.Blogger() instance
+        """
+        pass 
+
+    def create_mock_blog(self):
+        """
+        Create and return a mock blogger.Blog() instance for use in
+        Unit Testing the same model.
+        """
+        pass 
+
+    def create_mock_blog_category(self):
+        """
+        Create and return a mock blogger.BlogCategory instance
+        """
+        pass 
+
+    def create_mock_blogpost(self):
+        """
+        Create and return a blogger.BlogPost() instance for use during unit-testing
+        this same model.
+        """
+        pass 
+    
+    def create_mock_comment(self):
+        """
+        """
+        pass 
+
+
 class BloggerModelTestCase(TestCase):
     """
     Tests the blogger.Blogger model for proper validation, data integrity and state of 
