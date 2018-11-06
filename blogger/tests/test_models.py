@@ -47,11 +47,13 @@ class BaseModelTestCase(TestCase):
         blog.save()
         return blog
 
-    def create_mock_blog_category(self):
+    def create_mock_blog_category(self, category_data):
         """
         Create and return a mock blogger.BlogCategory instance
         """
-        pass 
+        category = BlogCategory.objects.create(**category_data)
+        category.save()
+        return category 
 
     def create_mock_blogpost(self):
         """
