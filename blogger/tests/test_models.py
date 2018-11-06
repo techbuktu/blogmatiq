@@ -37,12 +37,15 @@ class BaseModelTestCase(TestCase):
         blogger.save()
         self.blogger = blogger
 
-    def create_mock_blog(self):
+    def create_mock_blog(self, blog_data):
         """
         Create and return a mock blogger.Blog() instance for use in
         Unit Testing the same model.
         """
-        pass 
+        self.create_mock_blogger()
+        blog = Blog.objects.create(owner=self.blogger, **blog_data)
+        blog.save()
+        return blog
 
     def create_mock_blog_category(self):
         """
