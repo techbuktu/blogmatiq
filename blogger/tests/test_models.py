@@ -25,7 +25,17 @@ class BaseModelTestCase(TestCase):
         """
         Create a mock blogger.Blogger() instance
         """
-        pass 
+        self.create_mock_user()
+        blogger_info = {
+            'bio': 'I am a Software Blogger.'
+        }
+        if self.user:
+            blogger = Blogger.objects.create(user=self.user, **blogger_info)
+        else:
+            self.create_user()
+            blogger = Blogger.objects.create(user=self.user, **blogger_info)
+        blogger.save()
+        self.blogger = blogger
 
     def create_mock_blog(self):
         """
