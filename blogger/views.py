@@ -62,12 +62,12 @@ def blog_category_detail(request, blog_page, category_page):
     }
     return render(request, 'blogger/blog_category_detail.html', data)
 
+
 def blog_post_detail(request, blog_page, category_page, post_page):
     blog_post = BlogPost.objects.get(page=post_page)
-    comments = blog_post.comments.all()
+    comments_on_post = blog_post.comments.all()
     data = {
         'blog_post': blog_post,
-        'comments_on_post': comments
+        'comments': comments_on_post
     }
     return render(request, 'blogger/blog_post_detail.html', data)
-

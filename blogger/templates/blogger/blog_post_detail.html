@@ -4,29 +4,35 @@
 {% block page_content %}
 
 <div class="mdl-cell mdl-cell--11-col"  id="list_of_blogs"> 
-        {{ blog.name }}
+       <h3>
+                {{ blog_post.title }}
+       </h3>
 
 
-        {{ blog.desc|safe }}
+        {{ blog_post.body|safe }}
         
 
-    <h1> Blog Categories </h1>
+    <h5> Comments on this Blog Post </h5>
+{% if comments %}
 
-    {% for category in blog_categories %}
-    <div class="blog_category">
-            <a href="{% url 'blogger:blog_category' category.blog.page category.page %}"> {{ category.name }} </a>
-    </div>
-    {% endfor %}
+{% for comment in comments %}
+<div class="post_comment_item">
+        <h6>
+                {{ comment.subject }} : {{ comment.commenter }} 
+                <small> {{ comment.comment_date}} </small>
+        </h6>
+        <p>
+                {{ comment.body|safe }}
+        </p>
+        <a href="{% url 'blogger:blog_post' blog.page post.category.page post.page %}"> {{ post.title }} </a>
+</div>
+{% endfor %}
 
+{% else %}
 
-    <h1> Recent Blog Posts </h1>
+No comments on this Blog Post yet.
 
-    {% for post in blog_posts %}
-    <div class="blog_post_item">
-            <a href="{% url 'blogger:blog_post' blog.page post.category.page post.page %}"> {{ post.title }} </a>
-    </div>
-    {% endfor %}
-
+{% endif %}
 </div>
 
 
