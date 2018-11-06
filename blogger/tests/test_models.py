@@ -91,7 +91,8 @@ class BloggerModelTestCase(BaseModelTestCase):
             'bio': 'I am a Software Blogger'
         }
         self.create_mock_blogger(blogger_info)
-        self.assertEqual(self.blogger, self.user.blogger)        
+        self.assertEqual(self.blogger.user, self.user)
+        self.assertIsInstance(self.blogger.user, User)   
 
     def test_blogger_has_a_valid_page_field_value(self):
         pass 
