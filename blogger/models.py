@@ -41,7 +41,7 @@ class Blogger(models.Model):
 
 class Blog(models.Model):
 	owner = models.ForeignKey(Blogger, related_name="blogs", on_delete=models.CASCADE)
-	name = models.CharField(max_length=100)
+	name = models.CharField(max_length=100, null=False)
 	desc = models.TextField()
 	page = models.SlugField(max_length=110, blank=True)
 	date_created = models.DateTimeField(auto_now_add=True)

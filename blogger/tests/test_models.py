@@ -1,9 +1,11 @@
 from django.test import TestCase 
 from django.contrib.auth.models import User 
 from django.core.exceptions import ValidationError
+from django.utils import timezone 
 from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
 )
+
 
 class BaseModelTestCase(TestCase):
     """
@@ -151,12 +153,25 @@ class BlogModelTest(BaseModelTestCase):
             'desc': "This blog is about the ups and downs of creating a Pythonic blogging platform."
             
         }
-        blog = self.create_mock_blog(blog_info)
-        self.assertRaises(ValidationError)
+        with self.assertRaises(ValidationError):
+            blog = self.create_mock_blog(blog_info)
+            blog.clean()
 
 
     def test_blog_cannot_have_tampered_with_date_created_value(self):
-        pass 
+        blogger_data = {
+            'bio': 'I have a blog.'
+        }
+        self.create_mock_blogger(blogger_data)
+        blog_info = {
+            'name': 'Blog Uno',
+            'desc': "This blog is the first of its kind.",
+            'date_created': timezone.now()  
+        }
+        #blog = self.create_mock_blog(blog_info)
+        with self.assertRaises(ValidationError):
+            blog = self.create_mock_blog(blog_info)
+            blog.clean()
 
     def test_date_created_value_must_be_earlier_than_last_updated_value(self):
         pass 
