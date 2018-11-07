@@ -1,5 +1,6 @@
 from django.test import TestCase 
 from django.contrib.auth.models import User 
+from django.core.exceptions import ValidationError
 from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
 )
@@ -141,7 +142,18 @@ class BlogModelTest(BaseModelTestCase):
         self.assertIsInstance(blog.owner, Blogger)
 
     def test_blog_cannot_have_null_name(self):
-        pass 
+        blogger_data = {
+            'bio': 'I run a blog'
+        }
+        self.create_mock_blogger(blogger_data)
+        blog_info = {
+            # Has no 'name' field.
+            'desc': "This blog is about the ups and downs of creating a Pythonic blogging platform."
+            
+        }
+        blog = self.create_mock_blog(blog_info)
+        self.assertRaises(ValidationError)
+
 
     def test_blog_cannot_have_tampered_with_date_created_value(self):
         pass 
