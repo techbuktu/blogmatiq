@@ -156,8 +156,7 @@ class BlogModelTest(BaseModelTestCase):
         with self.assertRaises(ValidationError):
             blog = self.create_mock_blog(blog_info)
             blog.clean()
-
-
+    
     def test_blog_cannot_have_tampered_with_date_created_value(self):
         blogger_data = {
             'bio': 'I have a blog.'
@@ -183,7 +182,17 @@ class BlogModelTest(BaseModelTestCase):
         pass 
 
     def test_blog_must_have_valid_and_proper_string_representation(self):
-        pass 
+        blogger_data = {
+            'bio': 'I express my feelings in code and rhyme.'
+        }
+        self.create_mock_blogger(blogger_data)
+        blog_info = {
+            'name': 'Blog One',
+            'desc': "This is the first blog."
+        }
+        blog = self.create_mock_blog(blog_info)
+        self.assertEqual(str(blog), 'Blog One')
+
 
     def test_desc_field_cannot_be_blank_or_null(self):
         pass 
