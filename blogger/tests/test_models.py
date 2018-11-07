@@ -39,7 +39,6 @@ class BaseModelTestCase(TestCase):
         Create and return a mock blogger.Blog() instance for use in
         Unit Testing the same model.
         """
-        self.create_mock_blogger()
         blog = Blog.objects.create(owner=self.blogger, **blog_data)
         blog.save()
         return blog
@@ -98,7 +97,12 @@ class BloggerModelTestCase(BaseModelTestCase):
         pass 
     
     def test_blogger_has_a_valid_date_joined_value(self):
-        pass 
+        from django.db.models import DateTimeField
+        blogger_info = {
+            'bio': 'I am a Software Blogger'
+        }
+        self.create_mock_blogger(blogger_info)
+        self.assertIsInstance(self.blogger.date_joined, DateTimeField)
 
     def test_date_joined_is_older_than_last_updated_field(self):
         pass 
@@ -119,15 +123,22 @@ class BloggerModelTestCase(BaseModelTestCase):
         pass 
 
 
-class BlogModelTest(TestCase):
+class BlogModelTest(BaseModelTestCase):
     """
     Tests the blogger.Blog model's fields, validation, model relationships, etc.
     """
-    def create_new_blog_model_instance(self):
-        pass 
-
     def test_blog_has_a_blogger_who_owns_it(self):
-        pass 
+        blogger_data = {
+            'bio': 'I own a blog'
+        }
+        self.create_mock_blogger(blogger_data)
+        blog_info = {
+            'name': 'Blogmatiq One',
+            'desc': "This blog is about the ups and downs of creating a Pythonic blogging platform."
+            
+        }
+        blog = self.create_mock_blog(blog_info)
+        self.assertIsInstance(blog.owner, Blogger)
 
     def test_blog_cannot_have_null_name(self):
         pass 
