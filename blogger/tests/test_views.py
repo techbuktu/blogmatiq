@@ -39,7 +39,8 @@ class HomeViewTest(BaseViewTestCase):
     Tests that all aspects of the blogger.views.home() view are correct, proper and valid.
     """
     def test_uses_blogger_index_template(self):
-        pass 
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'blogger/index.html')
 
     def test_has_blog_list_in_context_data(self):
         pass 
