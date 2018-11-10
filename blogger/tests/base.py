@@ -66,11 +66,7 @@ class BaseBloggerAppUnitTestCase(TestCase):
         """
         Utility method to create a blogger.Comment instance
         """
-        if self.user:
-            comment = Comment.objects.create(commenter=self.user, **comment_data)
-        else:
-            self.create_mock_user()
-            comment = Comment.objects.create(comment=self.user, **comment_data)
+        comment = Comment.objects.create(**comment_data)
         comment.save()
         return comment 
 
@@ -123,7 +119,7 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         new_blog_category = self.create_mock_blog_category(blog_category_info)
         self.assertIsInstance(new_blog_category, BlogCategory)
 
-    def test_create_mock_blogpost_returns_valid_Blogpost_object_instance(self):
+    def test_create_mock_blogpost_returns_valid_BlogPost_object_instance(self):
         blogger_details = {
             'bio': 'I am a creative Entrepreneurial Blogger.'
         }
@@ -152,7 +148,39 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         blogpost = self.create_mock_blogpost(blogpost_info)
         self.assertIsInstance(blogpost, BlogPost)
     
-    @skip('later')
-    def test_create_mock_comment_returns_valid_comment_object(self):
-        blogpost = self.create_mock_blogpost({})
-        self.assertIsInstance(blogpost, BlogPost)
+    def test_create_mock_comment_returns_valid_Comment_object(self):
+        blogger_details = {
+            'bio': 'I am a creative Entrepreneurial Blogger.'
+        }
+        blogger = self.create_mock_blogger(blogger_details)
+        blog_info = {
+            'name': 'Blogzilla',
+            'desc': 'This is the Wordzilla of blogs.',
+            'owner': blogger
+        }
+        blog = self.create_mock_blog(blog_info)
+        blog_category_info = {
+            'name': 'Technocopia',
+            'desc' : 'The dream of technocrats; the envy of tehchnophobes.',
+            'blog': blog
+        }
+        category = self.create_mock_blog_category(blog_category_info)
+        blogpost_info = {
+            'title': 'Once upon a villagezilla.',
+            'category':  category
+        }
+        blogpost_info = {
+            'title': 'Once Upon a Coded Time',
+            'body': 'There still lives a techpreneur who wanders the wilderness of TechVille.',
+            'category': category
+        }
+        blogpost = self.create_mock_blogpost(blogpost_info)
+        commenter = User.objects.first()
+        comment_data = {
+            'commenter': commenter,
+            'subject': "C'est la vie!",
+            'blog_post': blogpost,
+            'body': "I agree with 70% and disagree with 30%. Here's where I tell you more about that"
+        }
+        comment_on_blogpost = self.create_mock_comment(comment_data)
+        self.assertIsInstance(comment_on_blogpost, Comment)
