@@ -1,7 +1,7 @@
 from django.test import TestCase 
 from django.http import HttpRequest 
 from django.utils.html import escape 
-from django.core.urlresolvers import resolve 
+from django.core.urlresolvers import resolve, reverse
 
 from blogger.models import (
     Blogger, Blog, BlogCategory, BlogPost, Comment
