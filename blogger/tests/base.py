@@ -103,12 +103,18 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
             }
         blog = self.create_mock_blog(blog_info)
         self.assertIsInstance(blog, Blog)
-
+    
+    @skip('later')
     def test_create_mock_blog_category_returns_blogcategory_model_instance(self):
-        pass 
+        category = self.create_mock_blog_category()
+        self.asssertIsInstance(category, BlogCategory)
 
+    @skip('later')
     def test_create_mock_blogpost_returns_valid_blogpost_object_instance(self):
-        pass 
-
+        blogpost = self.create_mock_blogpost()
+        self.assertIsInstance(blogpost, BlogPost)
+    
+    @skip('later')
     def test_create_mock_comment_returns_valid_comment_object(self):
-        pass 
+        blogpost = self.create_mock_blogpost({})
+        self.assertIsInstance(blogpost, BlogPost)
