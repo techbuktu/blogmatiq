@@ -1,4 +1,5 @@
 from django.test import TestCase 
+from unittest import skip
 from django.contrib.auth.models import User 
 from django.core.exceptions import ValidationError
 from django.utils import timezone 
@@ -16,26 +17,24 @@ class BaseBloggerAppUnitTestCase(TestCase):
         """
         Create a mock django.contrib.auth.models.User() object.
         """
-        user = User.objects.create(
+        try:
+            user = User.objects.get(username='muhammad')
+        except Exception:
+            user = User.objects.create(
             username="muhammad", is_staff=True, 
             first_name="Muhammad",last_name="Jalloh"
             )
-        user.set_password("S3CReT123")
-        user.save()
+            user.set_password("S3CReT123")
+            user.save()
         return user 
 
     def create_mock_blogger(self, blogger_info):
         """
         Create a mock blogger.Blogger() instance
         """
-        #self.create_mock_user()
-        try:
-            user = User.objects.first()
-            blogger = Blogger.objects.create(user=user, **blogger_info)
-        except Exception:
-            self.create_mock_user()
-            blogger = Blogger.objects.create(user=self.user, **blogger_info)
-        self.blogger = blogger
+        user = self.create_mock_user()
+        blogger = Blogger.objects.create(user = user, **blogger_info)
+        return blogger 
 
     def create_mock_blog(self, blog_data):
         """
@@ -85,7 +84,12 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         self.assertIsInstance(user, User)
 
     def test_create_mock_blogger_returns_blogger_model_instance(self):
-        pass 
+
+        blogger_info = {
+            'bio': 'I am a mock Blogger'
+        }
+        blogger = self.create_mock_blogger(blogger_info)
+        self.assertIsInstance(blogger, Blogger)
 
     def test_create_mock_blog_creates_and_returns_blog_model_instance(self):
         pass 
