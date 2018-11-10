@@ -111,13 +111,22 @@ class BlogDetailViewTest(BaseViewTestCase):
         Setup the blogger.views.blog_detail() view by setting up
         a sample Blog() to work with.
         """
+        pass 
+
+    def test_resolves_to_correct_blog_detail_url(self):
+        from django.core.urlresolvers import resolve 
+        from blogger.views import blog_detail
         blogger_data = {
             "bio": "I am a Blogger with 'views'. ;) "
         }
         self.blogger = self.create_mock_blogger(blogger_data)
-
-    def test_resolves_to_correct_blog_detail_url(self):
-        pass 
+        blog_info = {
+            'name': 'Travelogue',
+            'desc': "This blog is all about traveling the world solo and in teams."
+        }
+        self.create_mock_blog(blog_info)
+        response = self.client.get('/travelogue/')
+        self.assertEqual(response.func, blog_detail)
 
     def test_view_renders_correct_html_template(self):
         pass 

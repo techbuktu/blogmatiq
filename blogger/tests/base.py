@@ -16,25 +16,28 @@ class BaseBloggerAppUnitTestCase(TestCase):
         """
         Create a mock django.contrib.auth.models.User() object.
         """
-        user = User.objects.create(
+        try:
+            user = User.objects.first()
+        except Exception:
+            user = User.objects.create(
             username="muhammad", is_staff=True, 
             first_name="Muhammad",last_name="Jalloh"
             )
-        user.set_password("S3CReT123")
-        user.save()
-        self.user = user 
+            user.set_password("S3CReT123")
+            user.save()
+        self.user = user  
 
     def create_mock_blogger(self, blogger_info):
         """
         Create a mock blogger.Blogger() instance
         """
-        self.create_mock_user()
-        if self.user:
+        #self.create_mock_user()
+        try:
+            user = User.objects.first()
+            blogger = Blogger.objects.create(user=user, **blogger_info)
+        except Exception:
+            self.create_mock_user()
             blogger = Blogger.objects.create(user=self.user, **blogger_info)
-        else:
-            self.create_user()
-            blogger = Blogger.objects.create(user=self.user, **blogger_info)
-        blogger.save()
         self.blogger = blogger
 
     def create_mock_blog(self, blog_data):
