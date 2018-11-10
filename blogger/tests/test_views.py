@@ -131,10 +131,26 @@ class BlogDetailViewTest(BaseViewTestCase):
         self.create_mock_blog(blog_info)
         response = self.client.get('/travelogue/')
         self.assertTemplateUsed(response, 'blogger/blog_detail.html')
-
-    def test_template_renders_all_context_data_items(self):
+    
+    def test_template_is_passed_all_context_data_items(self):
         # Test for presence of each in .context dict
-        pass 
+        blogger_data = {
+            "bio": "I am a Blogger with 'views'. ;) "
+        }
+        blogger = self.create_mock_blogger(blogger_data)
+        blog_info = {
+            'name': 'Nomad',
+            'desc': "This blog is all about traveling the world solo and in teams.",
+            'owner': blogger
+        }
+        self.create_mock_blog(blog_info)
+        response = self.client.get('/nomad/')
+        self.assertIn('blog', response.context)
+        self.assertIn('blog_categories', response.context)
+        self.assertIn('blog_posts', response.context)
+        self.assertIn('page_url', response.context)
+
+
 
     def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
         pass 
