@@ -111,6 +111,21 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
 
     @skip('later')
     def test_create_mock_blogpost_returns_valid_blogpost_object_instance(self):
+        blogger_info = {
+
+        }
+        blog_info = {
+            'name': 'blogzilla',
+            'desc': 'This is the Wordzilla of blogs.'
+        }
+        blog_category_info ={
+
+        }
+        category = self.create_mock_blog_category()
+        blogpost_info = {
+            'title': 'Once upon a villagezilla.',
+            'category':  category
+        }
         blogpost = self.create_mock_blogpost()
         self.assertIsInstance(blogpost, BlogPost)
     
