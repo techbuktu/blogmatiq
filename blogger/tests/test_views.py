@@ -10,8 +10,10 @@ from blogger.views import (
     home, about, contact, newsletter, blog_detail, legal_terms, comment_on_post,
     blog_category_detail, blog_post_detail
     )
+from blogger.tests.base import BaseBloggerAppUnitTestCase
 
-class BaseViewTestCase(TestCase):
+
+class BaseViewTestCase(BaseBloggerAppUnitTestCase):
     """
     Base View Unit TestCase for blogger.views and 
     holds all common methods across all view Unit TestCases
@@ -109,7 +111,11 @@ class BlogDetailViewTest(BaseViewTestCase):
         Setup the blogger.views.blog_detail() view by setting up
         a sample Blog() to work with.
         """
-        pass 
+        blogger_data = {
+            "bio": "I am a Blogger with 'views'. ;) "
+        }
+        self.blogger = self.create_mock_blogger(blogger_data)
+
     def test_resolves_to_correct_blog_detail_url(self):
         pass 
 
