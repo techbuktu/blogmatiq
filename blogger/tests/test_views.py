@@ -160,7 +160,8 @@ class BlogCategoryViewTest(BaseViewTestCase):
     Tests all aspects of the blogger.views.blogcategory_detail() view
     """
     def test_view_resolves_to_correct_blog_category_url(self):
-        pass 
+        res = resolve('/travelogue/tourism/')
+        self.assertEqual(res.func, blog_category_detail)
 
     def test_views_uses_correct_html_template(self):
         pass 
