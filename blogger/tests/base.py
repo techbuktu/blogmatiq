@@ -16,16 +16,13 @@ class BaseBloggerAppUnitTestCase(TestCase):
         """
         Create a mock django.contrib.auth.models.User() object.
         """
-        try:
-            user = User.objects.first()
-        except Exception:
-            user = User.objects.create(
+        user = User.objects.create(
             username="muhammad", is_staff=True, 
             first_name="Muhammad",last_name="Jalloh"
             )
-            user.set_password("S3CReT123")
-            user.save()
-        self.user = user  
+        user.set_password("S3CReT123")
+        user.save()
+        return user 
 
     def create_mock_blogger(self, blogger_info):
         """
@@ -84,8 +81,8 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
     return the correct object instance types.
     """
     def test_create_mock_user_returns_user_instance(self):
-        self.create_mock_user()
-        self.assertIsInstance(self.user, User)
+        user = self.create_mock_user()
+        self.assertIsInstance(user, User)
 
     def test_create_mock_blogger_returns_blogger_model_instance(self):
         pass 
