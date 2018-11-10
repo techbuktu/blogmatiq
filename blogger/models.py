@@ -23,6 +23,9 @@ class Blogger(models.Model):
 			self.page = slugify(user_names[:90])
 
 		super(Blogger, self).save(*args, **kwargs)
+
+	def get_absolute_url(self):
+		return "bloggers/%s/" % (self.page)
 """
 	@property
 	def filterable_fields(self):
@@ -54,6 +57,9 @@ class Blog(models.Model):
 		if not self.page:
 			self.page = slugify(self.name)
 		super(Blog, self).save(*args, **kwargs)
+
+	def get_absolute_url(self):
+		return "%s/" % (self.page)
 """
 	@property
     def filterable_fields(self):
@@ -85,7 +91,9 @@ class BlogCategory(models.Model):
 			self.page = slugify(self.name)
 		super(BlogCategory, self).save(*args, **kwargs)
 
-
+	def get_absolute_url(self):
+		return "%s/%s/" % (self.blog.page, self.page)
+	
 	def __str__(self):
 		return self.name
 
@@ -118,6 +126,9 @@ class BlogPost(models.Model):
 		if not self.page:
 			self.page = slugify(self.title)
 		super(BlogPost, self).save(*args, **kwargs)
+
+	def get_absolute_url(self):
+		return "%s/%s/%s/" % (self.category.blog.page, self.category.page, self.page)
 
 	@property
 	def filterable_fields(self):
