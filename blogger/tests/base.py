@@ -123,24 +123,33 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         new_blog_category = self.create_mock_blog_category(blog_category_info)
         self.assertIsInstance(new_blog_category, BlogCategory)
 
-    @skip('later')
-    def test_create_mock_blogpost_returns_valid_blogpost_object_instance(self):
-        blogger_info = {
-
+    def test_create_mock_blogpost_returns_valid_Blogpost_object_instance(self):
+        blogger_details = {
+            'bio': 'I am a creative Entrepreneurial Blogger.'
         }
+        blogger = self.create_mock_blogger(blogger_details)
         blog_info = {
-            'name': 'blogzilla',
-            'desc': 'This is the Wordzilla of blogs.'
+            'name': 'Blogzilla',
+            'desc': 'This is the Wordzilla of blogs.',
+            'owner': blogger
         }
-        blog_category_info ={
-
+        blog = self.create_mock_blog(blog_info)
+        blog_category_info = {
+            'name': 'Technocopia',
+            'desc' : 'The dream of technocrats; the envy of tehchnophobes.',
+            'blog': blog
         }
-        category = self.create_mock_blog_category()
+        category = self.create_mock_blog_category(blog_category_info)
         blogpost_info = {
             'title': 'Once upon a villagezilla.',
             'category':  category
         }
-        blogpost = self.create_mock_blogpost()
+        blogpost_info = {
+            'title': 'Once Upon a Coded Time',
+            'body': 'There still lives a techpreneur who wanders the wilderness of TechVille.',
+            'category': category
+        }
+        blogpost = self.create_mock_blogpost(blogpost_info)
         self.assertIsInstance(blogpost, BlogPost)
     
     @skip('later')
