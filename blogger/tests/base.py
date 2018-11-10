@@ -79,11 +79,11 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
     TestCase class to test that the helper methods of the BaseBloggerAppUnitTestCase
     return the correct object instance types.
     """
-    def test_create_mock_user_returns_user_instance(self):
+    def test_create_mock_user_returns_auth_User_instance(self):
         user = self.create_mock_user()
         self.assertIsInstance(user, User)
 
-    def test_create_mock_blogger_returns_blogger_model_instance(self):
+    def test_create_mock_blogger_returns_Blogger_model_instance(self):
 
         blogger_info = {
             'bio': 'I am a mock Blogger'
@@ -91,7 +91,7 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         blogger = self.create_mock_blogger(blogger_info)
         self.assertIsInstance(blogger, Blogger)
 
-    def test_create_mock_blog_creates_AND_returns_blog_model_instance(self):
+    def test_create_mock_blog_creates_AND_returns_Blog_model_instance(self):
         blogger_details = {
             'bio': 'I am a mock Blogger'
         }
