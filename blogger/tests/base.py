@@ -104,10 +104,24 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         blog = self.create_mock_blog(blog_info)
         self.assertIsInstance(blog, Blog)
     
-    @skip('later')
     def test_create_mock_blog_category_returns_blogcategory_model_instance(self):
-        category = self.create_mock_blog_category()
-        self.asssertIsInstance(category, BlogCategory)
+        blogger_details = {
+            'bio': 'I am a mock Blogger'
+        }
+        blogger = self.create_mock_blogger(blogger_details)
+        blog_info = {
+            'name': 'Primero Blog',
+            'desc': "This blog is #1 in the technosphere.",
+            'owner': blogger
+            }
+        blog = self.create_mock_blog(blog_info)
+        blog_category_info = {
+            'name': 'The Life of Technocrats',
+            'desc' : 'How do technocrats live, breathe, make a living and go through life, one codebase at a time?',
+            'blog': blog
+        }
+        new_blog_category = self.create_mock_blog_category(blog_category_info)
+        self.assertIsInstance(new_blog_category, BlogCategory)
 
     @skip('later')
     def test_create_mock_blogpost_returns_valid_blogpost_object_instance(self):
