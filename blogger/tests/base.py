@@ -41,7 +41,7 @@ class BaseBloggerAppUnitTestCase(TestCase):
         Create and return a mock blogger.Blog() instance for use in
         Unit Testing the same model.
         """
-        blog = Blog.objects.create(owner=self.blogger, **blog_data)
+        blog = Blog.objects.create(**blog_data)
         blog.save()
         return blog
 
@@ -91,8 +91,18 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         blogger = self.create_mock_blogger(blogger_info)
         self.assertIsInstance(blogger, Blogger)
 
-    def test_create_mock_blog_creates_and_returns_blog_model_instance(self):
-        pass 
+    def test_create_mock_blog_creates_AND_returns_blog_model_instance(self):
+        blogger_details = {
+            'bio': 'I am a mock Blogger'
+        }
+        blogger = self.create_mock_blogger(blogger_details)
+        blog_info = {
+            'name': 'Blog One',
+            'desc': "This blog is #1 in the technosphere.",
+            'owner': blogger
+            }
+        blog = self.create_mock_blog(blog_info)
+        self.assertIsInstance(blog, Blog)
 
     def test_create_mock_blog_category_returns_blogcategory_model_instance(self):
         pass 
