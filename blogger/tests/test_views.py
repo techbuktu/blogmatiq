@@ -118,8 +118,7 @@ class BlogDetailViewTest(BaseViewTestCase):
         res = resolve('/travelogue/')
         self.assertEqual(res.func, blog_detail)
     
-    @skip('later')
-    def test_blog_detail_page_resolves_to_blog_detail_view(self):
+    def test_view_renders_correct_html_template(self):
         blogger_data = {
             "bio": "I am a Blogger with 'views'. ;) "
         }
@@ -131,10 +130,7 @@ class BlogDetailViewTest(BaseViewTestCase):
         }
         self.create_mock_blog(blog_info)
         response = self.client.get('/travelogue/')
-        self.assertEqual(response.func, blog_detail)
-
-    def test_view_renders_correct_html_template(self):
-        pass 
+        self.assertTemplateUsed(response, 'blogger/blog_detail.html')
 
     def test_template_renders_all_context_data_items(self):
         # Test for presence of each in .context dict
