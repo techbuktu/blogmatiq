@@ -104,6 +104,12 @@ class BlogDetailViewTest(BaseViewTestCase):
     """
     Tests all units of the blogger.views.blog_detail() view.
     """
+    def setUp(self):
+        """
+        Setup the blogger.views.blog_detail() view by setting up
+        a sample Blog() to work with.
+        """
+        pass 
     def test_resolves_to_correct_blog_detail_url(self):
         pass 
 
