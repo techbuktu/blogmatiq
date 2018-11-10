@@ -78,3 +78,26 @@ class BaseBloggerAppUnitTestCase(TestCase):
         comment.save()
         return comment 
 
+class HelperMethodsTest(BaseBloggerAppUnitTestCase):
+    """
+    TestCase class to test that the helper methods of the BaseBloggerAppUnitTestCase
+    return the correct object instance types.
+    """
+    def test_create_mock_user_returns_user_instance(self):
+        self.create_mock_user()
+        self.assertIsInstance(self.user, User)
+
+    def test_create_mock_blogger_returns_blogger_model_instance(self):
+        pass 
+
+    def test_create_mock_blog_creates_and_returns_blog_model_instance(self):
+        pass 
+
+    def test_create_mock_blog_category_returns_blogcategory_model_instance(self):
+        pass 
+
+    def test_create_mock_blogpost_returns_valid_blogpost_object_instance(self):
+        pass 
+
+    def test_create_mock_comment_returns_valid_comment_object(self):
+        pass 
