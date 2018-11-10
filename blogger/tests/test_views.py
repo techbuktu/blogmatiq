@@ -43,7 +43,8 @@ class HomeViewTest(BaseViewTestCase):
         self.assertTemplateUsed(response, 'blogger/index.html')
 
     def test_has_blog_list_in_context_data(self):
-        pass 
+        response = self.client.get('/')
+        self.assertIn('blog_list', response.context)
 
     def test_home_view_resolves_to_home_page_url(self):
         response = resolve('/')
