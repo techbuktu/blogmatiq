@@ -143,14 +143,12 @@ class BlogDetailViewTest(BaseViewTestCase):
             'desc': "This blog is all about traveling the world solo and in teams.",
             'owner': blogger
         }
-        self.create_mock_blog(blog_info)
+        blog = self.create_mock_blog(blog_info)
         response = self.client.get('/nomad/')
         self.assertIn('blog', response.context)
         self.assertIn('blog_categories', response.context)
         self.assertIn('blog_posts', response.context)
         self.assertIn('page_url', response.context)
-
-
 
     def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
         pass 
@@ -164,14 +162,46 @@ class BlogCategoryViewTest(BaseViewTestCase):
         self.assertEqual(res.func, blog_category_detail)
 
     def test_views_uses_correct_html_template(self):
-        pass 
+        blogger_data = {
+            "bio": "I am a Blogger with 'views'. ;) "
+        }
+        blogger = self.create_mock_blogger(blogger_data)
+        blog_info = {
+            'name': 'Nomad',
+            'desc': "This blog is all about traveling the world solo and in teams.",
+            'owner': blogger
+        }
+        blog = self.create_mock_blog(blog_info)
+        blog_category_info = {
+            'name': 'Shepherds',
+            'desc' : 'How do Shepherds live, breathe, make a living and go through life, one day at a time? Discover The Curious Life of Shepherds',
+            'blog': blog
+        }
+        self.create_mock_blog_category(blog_category_info)
+        response = self.client.get('/nomad/shepherds/')
+        self.assertTemplateUsed(response, 'blogger/blog_category_detail.html')
 
     def test_view_passes_valid_context_data_to_template(self):
-        pass
-
-    def test_context_data_contains_list_of_categorys_blog_posts(self):
-        pass 
-
+        blogger_data = {
+            "bio": "I am a Blogger with 'views'. ;) "
+        }
+        blogger = self.create_mock_blogger(blogger_data)
+        blog_info = {
+            'name': 'Nomad',
+            'desc': "This blog is all about traveling the world solo and in teams.",
+            'owner': blogger
+        }
+        blog = self.create_mock_blog(blog_info)
+        blog_category_info = {
+            'name': 'Shepherds',
+            'desc' : 'How do Shepherds live, breathe, make a living and go through life, one day at a time?',
+            'blog': blog
+        }
+        self.create_mock_blog_category(blog_category_info)
+        response = self.client.get('/nomad/shepherds/')
+        self.assertIn('category', response.context)
+        self.assertIn('category_posts', response.context)
+    
     def test_template_renders_list_of_blog_posts_of_this_category(self):
         pass 
 
