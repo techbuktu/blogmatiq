@@ -128,6 +128,9 @@ class BlogPost(models.Model):
 		super(BlogPost, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
+		"""
+		Shortcut helper method to return the absolute URL of any valid BlogPost's page.
+		"""
 		return "%s/%s/%s/" % (self.category.blog.page, self.category.page, self.page)
 
 	@property
