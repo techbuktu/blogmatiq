@@ -104,7 +104,7 @@ class HelperMethodsTest(BaseBloggerAppUnitTestCase):
         blog = self.create_mock_blog(blog_info)
         self.assertIsInstance(blog, Blog)
     
-    def test_create_mock_blog_category_returns_blogcategory_model_instance(self):
+    def test_create_mock_blog_category_returns_BlogCategory_model_instance(self):
         blogger_details = {
             'bio': 'I am a mock Blogger'
         }
