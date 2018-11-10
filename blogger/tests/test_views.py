@@ -1,4 +1,5 @@
 from django.test import TestCase 
+from unittest import skip
 from django.http import HttpRequest 
 from django.utils.html import escape 
 from django.core.urlresolvers import resolve, reverse
@@ -112,17 +113,21 @@ class BlogDetailViewTest(BaseViewTestCase):
         a sample Blog() to work with.
         """
         pass 
-
-    def test_resolves_to_correct_blog_detail_url(self):
-        from django.core.urlresolvers import resolve 
-        from blogger.views import blog_detail
+    
+    def test_blog_detail_page_resolves_to_blog_detail_view(self):
+        res = resolve('/travelogue/')
+        self.assertEqual(res.func, blog_detail)
+    
+    @skip('later')
+    def test_blog_detail_page_resolves_to_blog_detail_view(self):
         blogger_data = {
             "bio": "I am a Blogger with 'views'. ;) "
         }
-        self.blogger = self.create_mock_blogger(blogger_data)
+        blogger = self.create_mock_blogger(blogger_data)
         blog_info = {
             'name': 'Travelogue',
-            'desc': "This blog is all about traveling the world solo and in teams."
+            'desc': "This blog is all about traveling the world solo and in teams.",
+            'owner': blogger
         }
         self.create_mock_blog(blog_info)
         response = self.client.get('/travelogue/')
