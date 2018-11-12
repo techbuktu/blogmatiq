@@ -210,7 +210,8 @@ class BlogPostDetailViewTest(BaseViewTestCase):
     Tests all aspects of the blogger.views.blogpost_detail() view.
     """
     def test_blogpost_detail_url_resolves_to_blogpost_detail_view(self):
-        pass 
+        response = resolve('/travelogue/tourism/the-art-of-volunteerism/')
+        self.assertEqual(response.func, blog_post_detail)
 
     def test_view_renders_correct_template(self):
         pass 
