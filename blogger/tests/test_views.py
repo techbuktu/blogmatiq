@@ -185,7 +185,9 @@ class BlogPostDetailViewTest(BaseViewTestCase):
         self.assertTemplateUsed(response, 'blogger/blog_post_detail.html')
 
     def test_blogpost_detail_view_passes_valid_context_data_to_template(self):
-        pass 
+        response = self.client.get(self.blog_post.get_absolute_url())
+        self.assertIn('blog_post', response.context)
+        self.assertIn('comments', response.context)
     
     def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
         pass 
