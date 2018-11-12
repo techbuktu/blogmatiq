@@ -131,7 +131,7 @@ class BlogPost(models.Model):
 		"""
 		Shortcut helper method to return the absolute URL of any valid BlogPost's page.
 		"""
-		return "%s/%s/%s/" % (self.category.blog.page, self.category.page, self.page)
+		return "/%s/%s/%s/" % (self.category.blog.page, self.category.page, self.page)
 
 	@property
 	def filterable_fields(self):

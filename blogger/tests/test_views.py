@@ -19,23 +19,50 @@ class BaseViewTestCase(BaseBloggerAppUnitTestCase):
     Base View Unit TestCase for blogger.views and 
     holds all common methods across all view Unit TestCases
     """
+    def setUp(self):
+        """
+        Needed to maintain DRY and house creation of instances of blogger app's models 
+        (Blogger, Blog, BlogCategory, BlogPost and Comment) for use in the view unit tests.
+        """
+        blogger_data = {
+            "bio": "I am a Blogger with 'views'. ;) "
+        }
+        self.blogger = self.create_mock_blogger(blogger_data)
+        self.user = self.blogger.user 
+        blog_info = {
+            'name': 'Nomad',
+            'desc': "This blog is all about traveling the world solo and in teams.",
+            'owner': self.blogger
+        }
+        self.blog = self.create_mock_blog(blog_info)
+        blog_category_info = {
+            'name': 'Shepherds',
+            'desc' : 'How do Shepherds live, breathe, make a living and go through life, one day at a time? Discover The Curious Life of Shepherds',
+            'blog': self.blog
+        }
+        self.category = self.create_mock_blog_category(blog_category_info)
+        blogpost_info = {
+            'title': 'Life in the Hills of Fouta Djallon',
+            'body': 'In the mountains and valleys of Fouta Djallon, ',
+            'category': self.category
+        }
+        self.blog_post = self.create_mock_blogpost(blogpost_info)
 
-def post_invalid_data(self, data, target_url):
-    return self.client.post(target_url, data=data)
+    def post_invalid_data(self, data, target_url):
+        return self.client.post(target_url, data=data)
 
-def force_login(self, user):
-    """
-    A shortcut method to simulate a user login but the details 
-    of how a user is logged in are not important.
-    """
-    return self.client.force_login(user)
+    def force_login(self, user):
+        """
+        A shortcut method to simulate a user login but the details 
+        of how a user is logged in are not important.
+        """
+        return self.client.force_login(user)
 
-def login(self, auth_credentials):
-    """
-    Logs in a user with the provided username and password credentials.
-    """
-    return self.login(auth_credentials)
-
+    def login(self, auth_credentials):
+        """
+        Logs in a user with the provided username and password credentials.
+        """
+        return self.login(auth_credentials)
 
 class HomeViewTest(BaseViewTestCase):
     """
@@ -214,7 +241,8 @@ class BlogPostDetailViewTest(BaseViewTestCase):
         self.assertEqual(response.func, blog_post_detail)
 
     def test_view_renders_correct_template(self):
-        pass 
+        response = self.client.get(self.blog_post.get_absolute_url())
+        self.assertTemplateUsed(response, 'blogger/blog_post_detail.html')
 
     def test_blogpost_detail_view_passes_valid_context_data_to_template(self):
         pass 
