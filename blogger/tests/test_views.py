@@ -134,43 +134,16 @@ class BlogDetailViewTest(BaseViewTestCase):
     """
     Tests all units of the blogger.views.blog_detail() view.
     """
-    def setUp(self):
-        """
-        Setup the blogger.views.blog_detail() view by setting up
-        a sample Blog() to work with.
-        """
-        pass 
-    
     def test_blog_detail_page_resolves_to_blog_detail_view(self):
         res = resolve('/travelogue/')
         self.assertEqual(res.func, blog_detail)
     
     def test_view_renders_correct_html_template(self):
-        blogger_data = {
-            "bio": "I am a Blogger with 'views'. ;) "
-        }
-        blogger = self.create_mock_blogger(blogger_data)
-        blog_info = {
-            'name': 'Travelogue',
-            'desc': "This blog is all about traveling the world solo and in teams.",
-            'owner': blogger
-        }
-        self.create_mock_blog(blog_info)
-        response = self.client.get('/travelogue/')
+        response = self.client.get(self.blog.get_absolute_url())
         self.assertTemplateUsed(response, 'blogger/blog_detail.html')
     
     def test_template_is_passed_all_context_data_items(self):
         # Test for presence of each in .context dict
-        blogger_data = {
-            "bio": "I am a Blogger with 'views'. ;) "
-        }
-        blogger = self.create_mock_blogger(blogger_data)
-        blog_info = {
-            'name': 'Nomad',
-            'desc': "This blog is all about traveling the world solo and in teams.",
-            'owner': blogger
-        }
-        blog = self.create_mock_blog(blog_info)
         response = self.client.get('/nomad/')
         self.assertIn('blog', response.context)
         self.assertIn('blog_categories', response.context)
