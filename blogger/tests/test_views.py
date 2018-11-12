@@ -155,52 +155,22 @@ class BlogCategoryViewTest(BaseViewTestCase):
     Tests all aspects of the blogger.views.blogcategory_detail() view
     """
     def test_view_resolves_to_correct_blog_category_url(self):
-        res = resolve('/travelogue/tourism/')
+        res = resolve(self.category.get_absolute_url())
         self.assertEqual(res.func, blog_category_detail)
 
     def test_views_uses_correct_html_template(self):
-        blogger_data = {
-            "bio": "I am a Blogger with 'views'. ;) "
-        }
-        blogger = self.create_mock_blogger(blogger_data)
-        blog_info = {
-            'name': 'Nomad',
-            'desc': "This blog is all about traveling the world solo and in teams.",
-            'owner': blogger
-        }
-        blog = self.create_mock_blog(blog_info)
-        blog_category_info = {
-            'name': 'Shepherds',
-            'desc' : 'How do Shepherds live, breathe, make a living and go through life, one day at a time? Discover The Curious Life of Shepherds',
-            'blog': blog
-        }
-        self.create_mock_blog_category(blog_category_info)
-        response = self.client.get('/nomad/shepherds/')
+        response = self.client.get(self.category.get_absolute_url())
         self.assertTemplateUsed(response, 'blogger/blog_category_detail.html')
 
     def test_view_passes_valid_context_data_to_template(self):
-        blogger_data = {
-            "bio": "I am a Blogger with 'views'. ;) "
-        }
-        blogger = self.create_mock_blogger(blogger_data)
-        blog_info = {
-            'name': 'Nomad',
-            'desc': "This blog is all about traveling the world solo and in teams.",
-            'owner': blogger
-        }
-        blog = self.create_mock_blog(blog_info)
-        blog_category_info = {
-            'name': 'Shepherds',
-            'desc' : 'How do Shepherds live, breathe, make a living and go through life, one day at a time?',
-            'blog': blog
-        }
-        self.create_mock_blog_category(blog_category_info)
-        response = self.client.get('/nomad/shepherds/')
+        response = self.client.get(self.category.get_absolute_url())
         self.assertIn('category', response.context)
         self.assertIn('category_posts', response.context)
     
     def test_template_renders_list_of_blog_posts_of_this_category(self):
-        pass 
+        response = self.client.get(self.category.get_absolute_url())
+        blog_posts_byte_string = str.encode(self.blog_post.title)
+        self.assertIn(blog_posts_byte_string, response.content)
 
 class BlogPostDetailViewTest(BaseViewTestCase):
     """
@@ -219,6 +189,7 @@ class BlogPostDetailViewTest(BaseViewTestCase):
     
     def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
         pass 
+
 class LegalTermsViewTest(BaseViewTestCase):
     """
     Tests all granular units of the blogger.views.legal_terms() view.

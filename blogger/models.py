@@ -92,7 +92,7 @@ class BlogCategory(models.Model):
 		super(BlogCategory, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
-		return "%s/%s/" % (self.blog.page, self.page)
+		return "/%s/%s/" % (self.blog.page, self.page)
 	
 	def __str__(self):
 		return self.name
