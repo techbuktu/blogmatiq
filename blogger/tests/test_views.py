@@ -150,9 +150,6 @@ class BlogDetailViewTest(BaseViewTestCase):
         self.assertIn('blog_posts', response.context)
         self.assertIn('page_url', response.context)
 
-    def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
-        pass 
-
 class BlogCategoryViewTest(BaseViewTestCase):
     """
     Tests all aspects of the blogger.views.blogcategory_detail() view
@@ -220,6 +217,8 @@ class BlogPostDetailViewTest(BaseViewTestCase):
     def test_blogpost_detail_view_passes_valid_context_data_to_template(self):
         pass 
     
+    def test_that_view_redirects_to_comment_on_post_after_successful_POST_request(self):
+        pass 
 class LegalTermsViewTest(BaseViewTestCase):
     """
     Tests all granular units of the blogger.views.legal_terms() view.
